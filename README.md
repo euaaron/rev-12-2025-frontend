@@ -1,15 +1,15 @@
-# Cars (React + Vite + TypeScript)
+# Cars
 
 [![CI / Pages](../../actions/workflows/pages.yml/badge.svg)](../../actions/workflows/pages.yml)
 [![Coverage](./coverage-badge.svg)](../../actions/workflows/pages.yml)
 
-Lighthouse CI report (artifact): [download from the latest workflow run](../../actions/workflows/pages.yml)
+Lighthouse CI report (artifact): [download from the latest workflow run](../../actions/workflows/pages.yml), know that the result varies according to device, region and internet connection quality. Maybe you can get different results running Lighthouse yourself on a chromium browser like MS Edge or Google Chrome.
 
 Small demo web app for browsing a list of cars with filtering, sorting, pagination, and a “New Car” form.
 
 The UI talks to a GraphQL endpoint at `/graphql` via Apollo Client, but during local development it’s intercepted by Mock Service Worker (MSW) — so you can run the app without a real backend.
 
-## Tech stack (main)
+## Tech stack
 
 Runtime / UI
 - React: `^19.0.0`

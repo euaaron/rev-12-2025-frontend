@@ -17,7 +17,15 @@ export function Boot() {
 
     (async () => {
       const { worker } = await import("./mocks/browser");
-      await worker.start();
+      try {
+        await worker.start({
+          serviceWorker: {
+            url: `${import.meta.env.BASE_URL}mockServiceWorker.js`,
+          },
+        });
+      } catch (error) {
+        console.error("Failed to start MSW", error);
+      }
       if (!cancelled) setReady(true);
     })();
 

@@ -1,0 +1,14 @@
+{
+  "ci": {
+    "collect": {
+      "numberOfRuns": 1,
+      "settings": {
+        "chromeFlags": ["--headless", "--no-sandbox", "--disable-gpu"]
+      }
+    },
+    "upload": {
+      "target": "filesystem",
+      "outputDir": "./lighthouse-report"
+    }
+  }
+}

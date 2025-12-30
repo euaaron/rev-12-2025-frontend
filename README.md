@@ -3,7 +3,7 @@
 [![CI / Pages](../../actions/workflows/pages.yml/badge.svg)](../../actions/workflows/pages.yml)
 [![Coverage](./coverage-badge.svg)](../../actions/workflows/pages.yml)
 
-Lighthouse report (artifact): [download from the latest workflow run](../../actions/workflows/pages.yml)
+Lighthouse CI report (artifact): [download from the latest workflow run](../../actions/workflows/pages.yml)
 
 Small demo web app for browsing a list of cars with filtering, sorting, pagination, and a “New Car” form.
 

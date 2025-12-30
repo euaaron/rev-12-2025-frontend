@@ -1,7 +1,7 @@
 {
-  "name": "react-vite-ts",
+  "name": "rev-12-2025-frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,7 +12,6 @@
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "audit:lighthouse": "node ci/lighthouse.js",
     "preview": "vite preview",
     "preview:mock": "pnpm build:mock && vite preview"
   },
@@ -31,6 +30,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
+    "@lhci/cli": "^0.14.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.1",
     "@testing-library/user-event": "^14.6.1",
@@ -40,14 +40,12 @@
     "@typescript-eslint/parser": "^8.17.0",
     "@vitejs/plugin-react": "^4.3.4",
     "@vitest/coverage-v8": "^4.0.16",
-    "chrome-launcher": "^1.2.0",
     "eslint": "^9.16.0",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^16.5.0",
     "jsdom": "^27.4.0",
-    "lighthouse": "^13.0.1",
     "typescript": "^5.7.2",
     "vite": "^6.0.3",
     "vitest": "^4.0.16"

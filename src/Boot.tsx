@@ -3,14 +3,11 @@ import { ThemeProvider } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 
 import App from "./App";
+import { shouldUseMsw } from "./shouldUseMsw";
 import { appTheme } from "./theme";
 
-
 export function Boot() {
-  const useMsw =
-    typeof globalThis.__BOOT_USE_MSW__ === "boolean"
-      ? globalThis.__BOOT_USE_MSW__
-      : import.meta.env.DEV || import.meta.env.VITE_USE_MSW === "true";
+  const useMsw = shouldUseMsw(globalThis.__BOOT_USE_MSW__, import.meta.env);
   const [ready, setReady] = useState(() => !useMsw);
 
   useEffect(() => {

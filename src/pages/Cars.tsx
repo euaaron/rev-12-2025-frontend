@@ -16,7 +16,7 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
+import { alpha, useTheme } from "@mui/material/styles";
 import { lazy, Suspense, useState } from "react";
 
 import { CarsFiltersSidebar } from "../components/CarsFiltersSidebar";
@@ -28,6 +28,16 @@ const CarsList = lazy(async () => {
   return { default: module.CarsList };
 });
 
+function getErrorMessage(error: unknown): string {
+  if (!error) return "";
+  if (error instanceof Error) return error.message;
+  if (typeof error === "object") {
+    const maybeMessage = (error as { message?: unknown }).message;
+    if (typeof maybeMessage === "string") return maybeMessage;
+  }
+  return String(error);
+}
+
 export function Cars() {
   const { loading, error, createError } = useCars();
 
@@ -38,44 +48,54 @@ export function Cars() {
   const fullScreenCreate = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <Container
-      maxWidth={false}
-      sx={{
-        pb: 4,
-        minHeight: "100dvh",
-        display: "flex",
-        flexDirection: "column",
-        px: { xs: 2, sm: 3, md: 4 },
-        width: "100%",
-        maxWidth: 1920,
-        mx: "auto",
-      }}
-    >
-        <Stack spacing={3} sx={{ flex: "1 1 auto", minHeight: 0 }}>
-          <Box
-            sx={(theme) => ({
-              position: "sticky",
-              top: 0,
-              zIndex: theme.zIndex.appBar,
-              backgroundColor: "transparent",
-              pt: 4,
-              pb: 2,
-            })}
-          >
-            <Stack direction="row" alignItems="center" justifyContent="space-between">
-              <Typography variant="h4" component="h1">
-                Cars
-              </Typography>
+    <>
+      <Box
+        px={{ xs: 2, sm: 3, md: 4 }}
+        sx={(theme) => ({
+          position: "sticky",
+          top: 0,
+          zIndex: theme.zIndex.appBar,
+          backgroundColor: {
+            xs: "transparent",
+            md: "transparent",
+          },
+          backdropFilter: { xs: "blur(10px)", md: "none" },
+          WebkitBackdropFilter: { xs: "blur(10px)", md: "none" },
+          pt: 4,
+          pb: 2,
+        })}
+      >
+        <Stack direction="row" alignItems="center" justifyContent="space-between">
+          <Typography variant="h4" component="h1" color="#f1f1f1" sx={{
+            textShadow: `0 0 5px ${alpha(theme.palette.common.black, 0.7)}`,
+          }}>
+            CARS
+          </Typography>
 
-              <Button
-                variant="contained"
-                onClick={() => setIsCreateOpen(true)}
-                endIcon={<AddCircleOutlineIcon fontSize="small" />}
-              >
-                New Car
-              </Button>
-            </Stack>
-          </Box>
+          <Button
+            variant="contained"
+            onClick={() => setIsCreateOpen(true)}
+            endIcon={<AddCircleOutlineIcon fontSize="small" />}
+          >
+            New Car
+          </Button>
+        </Stack>
+      </Box>
+
+      <Container
+        maxWidth={false}
+        sx={{
+          pb: 4,
+          minHeight: "100dvh",
+          display: "flex",
+          flexDirection: "column",
+          px: { xs: 2, sm: 3, md: 4 },
+          width: "100%",
+          mx: "auto",
+        }}
+      >
+        <Stack spacing={3} sx={{ flex: "1 1 auto", minHeight: 0 }}>
+
 
           <Box
             sx={{
@@ -129,7 +149,11 @@ export function Cars() {
                   <Alert severity="error">Failed to create car.</Alert>
                 ) : null}
 
-                {error ? <Alert severity="error">{error.message}</Alert> : null}
+                {error ? (
+                  <Alert severity="error">
+                    {getErrorMessage(error) || "Something went wrong."}
+                  </Alert>
+                ) : null}
 
                 <Box
                   sx={{
@@ -197,6 +221,7 @@ export function Cars() {
             <NewCar onSubmitted={() => setIsCreateOpen(false)} />
           </DialogContent>
         </Dialog>
-    </Container>
+      </Container>
+    </>
   );
 }

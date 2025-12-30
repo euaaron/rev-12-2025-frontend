@@ -19,6 +19,15 @@ export default [
   },
   js.configs.recommended,
   {
+    files: ["ci/**/*.mjs"],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        ...globals.es2020,
+      },
+    },
+  },
+  {
     files: ["**/*.{ts,tsx}"],
     languageOptions: {
       parser: tsParser,

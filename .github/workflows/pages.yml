@@ -14,6 +14,19 @@ concurrency:
 
 jobs:
   build:
+    if: |
+      !(
+        (
+          github.event_name == 'push' && (
+            endsWith(github.event.head_commit.message, '(skip)')
+          )
+        ) ||
+        (
+          github.event_name == 'pull_request' && (
+            endsWith(github.event.pull_request.title, '(skip)')
+          )
+        )
+      )
     runs-on: ubuntu-latest
     permissions:
       contents: write

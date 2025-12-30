@@ -57,6 +57,15 @@ export default [
     },
   },
   {
+    files: ["vite.config.ts", "vitest.config.ts"],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        ...globals.es2020,
+      },
+    },
+  },
+  {
     files: [
       "src/contexts/**/*.{ts,tsx}",
       "src/hooks/**/*.{ts,tsx}",
